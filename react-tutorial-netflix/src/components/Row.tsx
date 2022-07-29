@@ -11,12 +11,12 @@ type Props = {
 };
 
 type Movie = {
-  id: string;
-  name: string;
-  title: string;
-  original_name: string;
-  poster_path: string;
-  backdrop_path: string;
+    id: string;
+    name: string;
+    title: string;
+    original_name: string;
+    poster_path: string;
+    backdrop_path: string;
 };
 
 export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
@@ -26,17 +26,16 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     // useEffect()はレンダリン後に実行される
     // 引数は(実行させたい関数, 実行タイミングを制御する関数を配列で記載)
     useEffect(() => {
-      async function fetchData() {
-        const request = await axios.get(fetchUrl);
-        setMovies(request.data.results);
-        console.log(movies);
-        return request;
-      }
+        async function fetchData() {
+            const request = await axios.get(fetchUrl);
+            setMovies(request.data.results);
+            console.log(movies);
+            return request;
+        }
 
-      // 関数の実行
-      fetchData();
+        // 関数の実行
+        fetchData();
     }, [movies, fetchUrl]);
-
 
     return (
         <div className="Row">
@@ -45,12 +44,11 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
                 {/** ポスターコンテンツ */}
                 {movies.map((movie, i) => (
                     <img
-                      key={movie.id}
-                      className={`Row-poster ${isLargeRow && "Row-poster-large"}`}
-                      src={`${base_url}${
-                        isLargeRow ? movie.poster_path : movie.backdrop_path
-                      }`}
-                      alt={movie.name}
+                        key={movie.id}
+                        className={`Row-poster ${isLargeRow && "Row-poster-large"}`}
+                        src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path
+                            }`}
+                        alt={movie.name}
                     />
                 ))}
             </div>
