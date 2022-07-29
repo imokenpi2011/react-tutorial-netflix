@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "../axios";
 
+// 画像表示用
+const base_url = "https://image.tmdb.org/t/p/original";
+
 type Props = {
     title: string;
     fetchUrl: string;
@@ -16,23 +19,41 @@ type Movie = {
   backdrop_path: string;
 };
 
-export const Row = ({ title, fetchUrl }: Props) => {
+export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     // データが取れ次第更新できるように空配列で初期値を定義する
     const [movies, setMovies] = useState<Movie[]>([]);
 
+    // useEffect()はレンダリン後に実行される
+    // 引数は(実行させたい関数, 実行タイミングを制御する関数を配列で記載)
     useEffect(() => {
-        async function fetchData() {
-            console.log("start fetch. url:", fetchUrl)
-            const request = await axios.get(fetchUrl);
-            setMovies(request.data.results);
-            return request;
-        }
-        fetchData();
-    }, [fetchUrl])
+      async function fetchData() {
+        const request = await axios.get(fetchUrl);
+        setMovies(request.data.results);
+        console.log(movies);
+        return request;
+      }
 
-    console.log(movies)
+      // 関数の実行
+      fetchData();
+    }, [movies, fetchUrl]);
+
 
     return (
-        <div className="Row" />
+        <div className="Row">
+            <h2>{title}</h2>
+            <div className="Row-posters">
+                {/** ポスターコンテンツ */}
+                {movies.map((movie, i) => (
+                    <img
+                      key={movie.id}
+                      className={`Row-poster ${isLargeRow && "Row-poster-large"}`}
+                      src={`${base_url}${
+                        isLargeRow ? movie.poster_path : movie.backdrop_path
+                      }`}
+                      alt={movie.name}
+                    />
+                ))}
+            </div>
+        </div>
     );
 };
