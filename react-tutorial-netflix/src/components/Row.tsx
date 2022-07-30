@@ -35,7 +35,7 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
 
         // 関数の実行
         fetchData();
-    }, [movies, fetchUrl]);
+    }, [fetchUrl]);
 
     return (
         <div className="Row">
