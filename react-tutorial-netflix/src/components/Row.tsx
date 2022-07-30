@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "../axios";
+import "./Row.scss";
 
 // 画像表示用
 const base_url = "https://image.tmdb.org/t/p/original";
