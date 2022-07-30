@@ -27,7 +27,10 @@ export const Banner = () => {
             );
             return request;
         }
-        fetchData();
+
+        setInterval(() => {
+            fetchData();
+        }, 10000);
     }, []);
 
     console.log(movie);
