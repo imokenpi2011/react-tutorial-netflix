@@ -1,4 +1,4 @@
-const API_KEY = "245dec6c49f41748979a3056ae379ed8"; // TMDBのAPIKeyを入れる
+export const API_KEY = "245dec6c49f41748979a3056ae379ed8"; // TMDBのAPIKeyを入れる
 
 // リクエストのURLを定義している
 // export defaultを使用すると、import時に命名を変更できてしまうのでネームドでexportする
